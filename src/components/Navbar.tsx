@@ -12,13 +12,27 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    navLinks.forEach(({ href }) => {
+      const el = document.querySelector(href);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -26,33 +40,33 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-surface-lowest/80 backdrop-blur-xl border-b border-outline-variant/30"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/10"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between">
+      <div className="flex justify-between items-center h-20 px-4 md:px-8 max-w-[80rem] mx-auto">
         <a
           href="#"
-          className="font-[family-name:var(--font-space-grotesk)] text-base font-bold tracking-[0.15em] text-on-surface hover:text-secondary transition-colors"
+          className="font-[family-name:var(--font-space-grotesk)] text-xl font-bold text-on-surface tracking-tighter"
         >
-          HAU KING YIU
+          TONY HAU
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex gap-8 items-center">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="font-[family-name:var(--font-geist)] text-base font-medium text-on-surface-variant hover:text-secondary transition-colors tracking-wide"
+              className={`font-[family-name:var(--font-geist)] text-sm font-medium tracking-wide transition-colors duration-300 active:scale-95 ${
+                activeSection === link.href.slice(1)
+                  ? "text-secondary"
+                  : "text-on-surface-variant hover:text-secondary"
+              }`}
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="font-[family-name:var(--font-geist)] text-base font-medium px-6 py-2.5 rounded bg-secondary text-on-secondary hover:shadow-[0_0_20px_rgba(76,215,246,0.3)] transition-all"
+            className="bg-secondary text-on-secondary px-6 py-2 rounded font-[family-name:var(--font-geist)] text-sm font-medium glow-button ml-4"
           >
             Resume
           </a>
@@ -85,7 +99,7 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-surface-lowest/95 backdrop-blur-xl border-b border-outline-variant/30 px-6 py-4"
+          className="md:hidden bg-surface-container-lowest/95 backdrop-blur-xl border-b border-white/10 px-8 py-4"
         >
           {navLinks.map((link) => (
             <a

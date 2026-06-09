@@ -22,7 +22,7 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Hau King Yiu - AI Researcher & Developer",
+  title: "Tony Hau - AI Researcher & Developer",
   description:
     "AI Researcher & Developer at HKUST. Building robust machine learning models and sophisticated data infrastructures.",
 };
