@@ -1,0 +1,56 @@
+import type { Metadata } from "next";
+import Script from "next/script";
+import { Space_Grotesk, Inter, Geist } from "next/font/google";
+import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
+export const metadata: Metadata = {
+  title: "Hau King Yiu - AI Researcher & Developer",
+  description:
+    "AI Researcher & Developer at HKUST. Building robust machine learning models and sophisticated data infrastructures.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${inter.variable} ${geist.variable} h-full antialiased`}
+    >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body className="min-h-full flex flex-col">
+        <Script
+          id="material-symbols"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `var link=document.createElement('link');link.rel='stylesheet';link.href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0';document.head.appendChild(link);`,
+          }}
+        />
+        {children}
+      </body>
+    </html>
+  );
+}
