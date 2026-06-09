@@ -4,9 +4,8 @@ import { motion } from "framer-motion";
 
 const socials = [
   { label: "Email", href: "mailto:tonyhauky@gmail.com" },
-  { label: "LinkedIn", href: "#" },
-  { label: "GitHub", href: "#" },
-  { label: "Scholar", href: "#" },
+  // { label: "LinkedIn", href: "#" },
+  { label: "GitHub", href: "https://github.com/shadowdesu26" },
 ];
 
 export default function Footer() {
@@ -38,8 +37,7 @@ export default function Footer() {
           </div>
 
           <p className="font-[family-name:var(--font-geist)] text-sm text-outline">
-            &copy; {new Date().getFullYear()} Hau King Yiu. AI Research &amp;
-            Development.
+            &copy; {new Date().getFullYear()}  Hau King Yiu
           </p>
         </motion.div>
       </div>
