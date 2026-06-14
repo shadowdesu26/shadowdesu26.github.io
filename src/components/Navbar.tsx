@@ -65,7 +65,9 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="https://drive.google.com/file/d/1a0i_waobtlftB0B1XDWPIif4yPRTMW1G/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-secondary text-on-secondary px-6 py-2 rounded font-[family-name:var(--font-geist)] text-sm font-medium glow-button ml-4"
           >
             Resume
